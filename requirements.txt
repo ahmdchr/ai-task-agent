@@ -1,0 +1,14 @@
+# Core dependencies
+msal==1.31.0
+requests==2.32.3
+beautifulsoup4==4.12.3
+python-dateutil==2.9.0.post0
+google-generativeai==0.7.2
+
+# Utilities
+soupsieve==2.5
+urllib3==2.2.3
+
+# Optional (for testing & development)
+pytest==8.3.3
+pytz==2025.1
