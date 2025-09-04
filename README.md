@@ -273,7 +273,7 @@ Computer Science Student | Tunisia
 🚀 Building AI-powered productivity tools
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/ahmdchr)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/ahmed.chourou)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/ahmedchourou)
 
 ---
 
