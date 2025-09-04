@@ -288,5 +288,5 @@ Computer Science Student | Tunisia
 
 <div align="center">
   <p>⭐ Star this repository if it helped you automate your task management!</p>
-  <p>🐛 Found a bug? <a href="https://github.com/ahmdchr/ai-task-management-agent/issues">Report it here</a></p>
+  <p>🐛 Found a bug? <a href="https://github.com/ahmdchr/ai-task-agent/issues">Report it here</a></p>
 </div>
