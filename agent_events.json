@@ -82,5 +82,53 @@
     "deadline": "2025-09-07T17:00:00+01:00",
     "duration_min": 180,
     "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BIAAAA=": {
+    "subject": "Attend team call",
+    "deadline": "2025-09-02T10:00:00+01:00",
+    "duration_min": 120,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BMAAAA=": {
+    "subject": "write the project summary",
+    "deadline": "2025-09-01T17:00:00+01:00",
+    "duration_min": 240,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BQAAAA=": {
+    "subject": "review the code",
+    "deadline": "2025-08-30T17:00:00+01:00",
+    "duration_min": 90,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BUAAAA=": {
+    "subject": "Prepare draft",
+    "deadline": "2025-08-31T17:00:00+01:00",
+    "duration_min": 120,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BYAAAA=": {
+    "subject": "Study the paper together",
+    "deadline": "2025-08-29T17:00:00+01:00",
+    "duration_min": 120,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BcAAAA=": {
+    "subject": "complete the paper",
+    "deadline": "2025-08-29T17:00:00+01:00",
+    "duration_min": 240,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BgAAAA=": {
+    "subject": "Submit report",
+    "deadline": "2025-08-30T17:00:00+01:00",
+    "duration_min": 240,
+    "tz": "Africa/Tunis"
+  },
+  "AQMkADAwATM3ZmYAZS0wMAAzNy03NWY1LTAwAi0wMAoARgAAA9RL5Dcn-xxNsyMMtUeKUfMHAMRMZvZtJ7hFqipnIqNGMEwAAAIBDQAAAMRMZvZtJ7hFqipnIqNGMEwAB0cP2BkAAAA=": {
+    "subject": "Finalize report",
+    "deadline": "2025-08-30T17:00:00+01:00",
+    "duration_min": 240,
+    "tz": "Africa/Tunis"
   }
 }

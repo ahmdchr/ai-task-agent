@@ -22,26 +22,53 @@ PREFER_TZ = os.environ.get("AGENT_TZ", None)  # e.g., "Africa/Tunis"
 def load_cache():
     cache = msal.SerializableTokenCache()
     if os.path.exists(TOKEN_CACHE_PATH):
-        with open(TOKEN_CACHE_PATH, "r") as f:
-            cache.deserialize(f.read())
+        # Try UTF-8 text first
+        try:
+            with open(TOKEN_CACHE_PATH, "r", encoding="utf-8") as f:
+                cache.deserialize(f.read())
+                return cache
+        except Exception:
+            pass
+        # Try binary → decode best-effort
+        try:
+            with open(TOKEN_CACHE_PATH, "rb") as f:
+                raw = f.read()
+            cache.deserialize(raw.decode("utf-8", errors="ignore"))
+            return cache
+        except Exception:
+            # Corrupt cache: remove and start fresh
+            try:
+                os.remove(TOKEN_CACHE_PATH)
+            except Exception:
+                pass
+            cache = msal.SerializableTokenCache()
     return cache
 
 def save_cache(cache):
     if cache.has_state_changed:
-        with open(TOKEN_CACHE_PATH, "w") as f:
+        with open(TOKEN_CACHE_PATH, "w", encoding="utf-8") as f:
             f.write(cache.serialize())
+
 
 def get_token():
     cache = load_cache()
     app = msal.PublicClientApplication(CLIENT_ID, authority=AUTHORITY, token_cache=cache)
 
-    accounts = app.get_accounts()
+    try:
+        accounts = app.get_accounts()
+    except Exception:
+        # If MSAL still chokes, start clean
+        cache = msal.SerializableTokenCache()
+        app = msal.PublicClientApplication(CLIENT_ID, authority=AUTHORITY, token_cache=cache)
+        accounts = []
+
     if accounts:
         result = app.acquire_token_silent(SCOPE, account=accounts[0])
         if result:
             save_cache(cache)
             return result
 
+    # Fallback: device code flow
     flow = app.initiate_device_flow(scopes=SCOPE)
     if "message" not in flow:
         raise RuntimeError(f"Failed to initiate device flow: {flow}")
@@ -145,15 +172,35 @@ def serve_client(conn):
             data += chunk
         if not data:
             return
-        req = json.loads(data.decode("utf-8").splitlines()[-1])
+
+        # Take the last complete line for robustness
+        try:
+            req = json.loads(data.decode("utf-8").splitlines()[-1])
+        except Exception as e:
+            # Malformed request → proper JSON-RPC error object
+            resp = {
+                "jsonrpc": "2.0",
+                "id": None,
+                "error": {"code": -32700, "message": f"Parse error: {e}"}
+            }
+            conn.sendall((json.dumps(resp) + "\n").encode("utf-8"))
+            return
+
         try:
             result = handle_request(req)
-            resp = {"jsonrpc":"2.0","id":req.get("id"),"result":result}
+            resp = {"jsonrpc": "2.0", "id": req.get("id"), "result": result}
         except Exception as e:
-            resp = {"jsonrpc":"2.0","id":req.get("id"),"error":str(e)}
-        conn.sendall((json.dumps(resp)+"\n").encode("utf-8"))
+            # Always return a JSON-RPC compliant error object
+            resp = {
+                "jsonrpc": "2.0",
+                "id": req.get("id"),
+                "error": {"code": -32000, "message": str(e)}
+            }
+
+        conn.sendall((json.dumps(resp) + "\n").encode("utf-8"))
     finally:
         conn.close()
+
 
 def run():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

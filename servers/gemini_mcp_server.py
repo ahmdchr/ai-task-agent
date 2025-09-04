@@ -40,15 +40,33 @@ def serve_client(conn):
             data += chunk
         if not data:
             return
-        req = json.loads(data.decode("utf-8").splitlines()[-1])
+
+        # Take the last complete line for robustness
+        try:
+            req = json.loads(data.decode("utf-8").splitlines()[-1])
+        except Exception as e:
+            resp = {
+                "jsonrpc": "2.0",
+                "id": None,
+                "error": {"code": -32700, "message": f"Parse error: {e}"}
+            }
+            conn.sendall((json.dumps(resp) + "\n").encode("utf-8"))
+            return
+
         try:
             result = handle_request(req)
-            resp = {"jsonrpc":"2.0","id":req.get("id"),"result":result}
+            resp = {"jsonrpc": "2.0", "id": req.get("id"), "result": result}
         except Exception as e:
-            resp = {"jsonrpc":"2.0","id":req.get("id"),"error":str(e)}
-        conn.sendall((json.dumps(resp)+"\n").encode("utf-8"))
+            resp = {
+                "jsonrpc": "2.0",
+                "id": req.get("id"),
+                "error": {"code": -32000, "message": str(e)}
+            }
+
+        conn.sendall((json.dumps(resp) + "\n").encode("utf-8"))
     finally:
         conn.close()
+
 
 def run():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
